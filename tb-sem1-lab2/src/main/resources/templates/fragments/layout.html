@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head(title)">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title th:text="${title} + ' – VODUser'">VODUser</title>
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.8/css/bootstrap.min.css}">
+</head>
+<body>
+<nav th:fragment="nav" class="navbar navbar-expand-sm navbar-light bg-white border-bottom mb-4">
+	<div class="container">
+		<a class="navbar-brand" th:href="@{/}">VODUser</a>
+		<ul class="navbar-nav me-auto">
+			<li class="nav-item"><a class="nav-link text-dark" th:href="@{/}">Home</a></li>
+			<li class="nav-item"><a class="nav-link text-dark" th:href="@{/Account/CheckLogin}">Sprawdź logowanie</a></li>
+		</ul>
+		<ul class="navbar-nav">
+			<th:block sec:authorize="isAuthenticated()">
+				<li class="nav-item">
+					<form th:action="@{/Account/Logout}" method="post">
+						<button type="submit" class="btn btn-link nav-link text-dark">Wyloguj</button>
+					</form>
+				</li>
+			</th:block>
+			<th:block sec:authorize="!isAuthenticated()">
+				<li class="nav-item"><a class="nav-link text-dark" th:href="@{/Account/Register}">Rejestracja</a></li>
+				<li class="nav-item"><a class="nav-link text-dark" th:href="@{/Account/Login}">Logowanie</a></li>
+			</th:block>
+		</ul>
+	</div>
+</nav>
+</body>
+</html>

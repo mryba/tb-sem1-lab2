@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: tb-sem1-lab2
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tb_sem1_lab2
+    username: tb_sem1_lab2
+    password: tb_sem1_lab2
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+
+app:
+  remember-me-key: ${REMEMBER_ME_KEY:lab2-local-remember-me-key}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Rejestracja')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+<main class="container">
+	<h1>Rejestracja</h1>
+	<p>Hasło: co najmniej 8 znaków, mała i duża litera, cyfra oraz znak specjalny.</p>
+	<form th:action="@{/Account/Register}" th:object="${registerForm}" method="post" novalidate>
+		<ul class="text-danger" th:if="${#fields.hasAnyErrors()}">
+			<li th:each="error : ${#fields.allErrors()}" th:text="${error}"></li>
+		</ul>
+		<div class="mb-3">
+			<label for="email" class="form-label">E-mail</label>
+			<input type="email" th:field="*{email}" class="form-control" autocomplete="username">
+			<span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+		</div>
+		<div class="mb-3">
+			<label for="password" class="form-label">Hasło</label>
+			<input type="password" th:field="*{password}" class="form-control" autocomplete="new-password">
+			<span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+		</div>
+		<div class="mb-3">
+			<label for="confirmPassword" class="form-label">Powtórz hasło</label>
+			<input type="password" th:field="*{confirmPassword}" class="form-control" autocomplete="new-password">
+			<span class="text-danger" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span>
+		</div>
+		<button type="submit" class="btn btn-primary">Zarejestruj</button>
+	</form>
+</main>
+</body>
+</html>

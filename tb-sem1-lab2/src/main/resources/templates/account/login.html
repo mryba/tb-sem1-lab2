@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Logowanie')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+<main class="container">
+	<h1>Logowanie</h1>
+	<form th:action="@{/Account/Login}" th:object="${loginForm}" method="post" novalidate>
+		<input type="hidden" name="returnUrl" th:value="${returnUrl}">
+		<ul class="text-danger" th:if="${loginErrors != null}">
+			<li th:each="error : ${loginErrors}" th:text="${error}"></li>
+		</ul>
+		<div class="mb-3">
+			<label for="email" class="form-label">E-mail</label>
+			<input type="email" th:field="*{email}" class="form-control" autocomplete="username">
+		</div>
+		<div class="mb-3">
+			<label for="password" class="form-label">Hasło</label>
+			<input type="password" th:field="*{password}" class="form-control" autocomplete="current-password">
+		</div>
+		<div class="mb-3 form-check">
+			<input type="checkbox" th:field="*{rememberMe}" class="form-check-input">
+			<label for="rememberMe" class="form-check-label">Zapamiętaj mnie</label>
+		</div>
+		<button type="submit" class="btn btn-primary">Zaloguj</button>
+	</form>
+</main>
+</body>
+</html>
